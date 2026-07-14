@@ -1,0 +1,257 @@
+- generic [active] [ref=f15e1]:
+  - banner [ref=f15e4]:
+    - navigation [ref=f15e5]:
+      - generic [ref=f15e6]:
+        - link [ref=f15e7] [cursor=pointer]:
+          - /url: ""
+          - img [ref=f15e8]
+        - link "Osool" [ref=f15e19] [cursor=pointer]:
+          - /url: https://test.osool.cloud/dashboards/admin
+          - img "Osool" [ref=f15e20]
+      - list [ref=f15e22]:
+        - listitem [ref=f15e23]:
+          - link "العربية" [ref=f15e24] [cursor=pointer]:
+            - /url: https://test.osool.cloud/language/ar
+        - listitem [ref=f15e25]:
+          - link "" [ref=f15e28] [cursor=pointer]:
+            - /url: javascript:;
+            - generic [ref=f15e29]: 
+  - text:    
+  - main [ref=f15e30]:
+    - complementary [ref=f15e31]:
+      - list [ref=f15e35]:
+        - listitem [ref=f15e36]:
+          - generic [ref=f15e37]: Main Menu
+        - listitem [ref=f15e38]:
+          - link "Projects" [ref=f15e39] [cursor=pointer]:
+            - /url: https://test.osool.cloud/workspace/projects
+            - img [ref=f15e40]
+            - generic [ref=f15e43]: Projects
+        - listitem [ref=f15e44]:
+          - link "Admin Management" [ref=f15e45] [cursor=pointer]:
+            - /url: https://test.osool.cloud/workspace
+            - img [ref=f15e46]
+            - generic [ref=f15e49]: Admin Management
+        - listitem [ref=f15e50]:
+          - link "Service Providers" [ref=f15e51] [cursor=pointer]:
+            - /url: https://test.osool.cloud/serviceproviders/workspace
+            - img [ref=f15e53]
+            - generic [ref=f15e54]: Service Providers
+        - listitem [ref=f15e55]:
+          - link "Clients Requests " [ref=f15e56] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=f15e57]
+            - generic [ref=f15e60]: Clients Requests
+            - generic [ref=f15e61]: 
+        - listitem [ref=f15e62]:
+          - link "Manage Releases" [ref=f15e63] [cursor=pointer]:
+            - /url: https://test.osool.cloud/workspace/manage-releases
+            - img [ref=f15e64]
+            - generic [ref=f15e66]: Manage Releases
+        - listitem [ref=f15e67]:
+          - link "Manage User Permissions TEST " [ref=f15e68] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=f15e69]
+            - generic [ref=f15e72]:
+              - text: Manage User Permissions
+              - generic [ref=f15e73]: TEST
+            - generic [ref=f15e74]: 
+        - listitem [ref=f15e75]:
+          - link "Application Settings" [ref=f15e76] [cursor=pointer]:
+            - /url: https://test.osool.cloud/settings/list
+            - img [ref=f15e77]
+            - generic [ref=f15e80]: Application Settings
+        - listitem [ref=f15e81]:
+          - link "Registration Requests 2" [ref=f15e82] [cursor=pointer]:
+            - /url: https://test.osool.cloud/psp-registration-requests/list
+            - img [ref=f15e83]
+            - generic [ref=f15e85]: Registration Requests
+            - generic [ref=f15e86]: "2"
+        - listitem [ref=f15e87]:
+          - link "Procurement " [ref=f15e88] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=f15e89]
+            - generic [ref=f15e92]: Procurement
+            - generic [ref=f15e93]: 
+        - listitem [ref=f15e94]:
+          - link "Inventory " [ref=f15e95] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=f15e96]
+            - generic [ref=f15e99]: Inventory
+            - generic [ref=f15e100]: 
+        - listitem [ref=f15e101]:
+          - link "Subscribers " [ref=f15e102] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=f15e103]
+            - generic [ref=f15e106]: Subscribers
+            - generic [ref=f15e107]: 
+        - listitem [ref=f15e108]:
+          - link "Configuration " [ref=f15e109] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=f15e110]
+            - generic [ref=f15e112]: Configuration
+            - generic [ref=f15e113]: 
+    - generic [ref=f15e120]:
+      - generic [ref=f15e123]:
+        - generic [ref=f15e124]:
+          - generic [ref=f15e125]:
+            - heading "Projects List" [level=4] [ref=f15e126]
+            - generic [ref=f15e127]: 156 Projects
+          - generic [ref=f15e128]:
+            - img [ref=f15e129]
+            - textbox "Search" [ref=f15e132]:
+              - /placeholder: Search by Name
+        - link " Create New Project" [ref=f15e134] [cursor=pointer]:
+          - /url: https://test.osool.cloud/workspace/create-project
+          - generic [ref=f15e135]: 
+          - text: Create New Project
+      - generic [ref=f15e136]:
+        - generic [ref=f15e139]:
+          - generic [ref=f15e141]:
+            - img "img" [ref=f15e143]
+            - generic [ref=f15e146]:
+              - heading "Project Test 1" [level=6] [ref=f15e147]:
+                - generic [ref=f15e148]: Project Test 1
+              - generic [ref=f15e150]: "Project Owner: Mohamed Beyoumi POA"
+              - generic [ref=f15e152]:
+                - generic [ref=f15e153]:
+                  - checkbox
+                - paragraph [ref=f15e156]: Ability to Delete Work Orders
+          - generic [ref=f15e158]:
+            - link "Enter Project" [ref=f15e159] [cursor=pointer]:
+              - /url: enter/eyJpdiI6ImxWaVptT20xL1hJK0NrWE10dkxSclE9PSIsInZhbHVlIjoiZVVsL1M5V1R4QUtYMU5acXE0NHloQT09IiwibWFjIjoiNDFhYTk1NzJjMmY0YTU1ODNiZGY3MjgzYTM2ZWIzMjY3ZGUxMzliMDU3ZmM1YzYxMzNhN2ZkNWNiMjMxYjM4NCIsInRhZyI6IiJ9
+            - link "Edit Project" [ref=f15e160] [cursor=pointer]:
+              - /url: edit-project/eyJpdiI6ImxWaVptT20xL1hJK0NrWE10dkxSclE9PSIsInZhbHVlIjoiZVVsL1M5V1R4QUtYMU5acXE0NHloQT09IiwibWFjIjoiNDFhYTk1NzJjMmY0YTU1ODNiZGY3MjgzYTM2ZWIzMjY3ZGUxMzliMDU3ZmM1YzYxMzNhN2ZkNWNiMjMxYjM4NCIsInRhZyI6IiJ9
+        - generic [ref=f15e163]:
+          - generic [ref=f15e165]:
+            - img "img" [ref=f15e167]
+            - generic [ref=f15e170]:
+              - heading "Bayoumis Project" [level=6] [ref=f15e171]:
+                - generic [ref=f15e172]: Bayoumis Project
+              - generic [ref=f15e174]: "Project Owner: Bayoumi POA"
+              - generic [ref=f15e176]:
+                - generic [ref=f15e177]:
+                  - checkbox
+                - paragraph [ref=f15e180]: Ability to Delete Work Orders
+          - generic [ref=f15e182]:
+            - link "Enter Project" [ref=f15e183] [cursor=pointer]:
+              - /url: enter/eyJpdiI6InhCNFNBSlRXK2NKcElpcFVSRytoNXc9PSIsInZhbHVlIjoiekpBVzVSN0tXSk5PQVo1b0I4QVVuZz09IiwibWFjIjoiNmUwZTYyMjBkZGNlMDY2OGQ4NDAyZTY2M2EwMTg0ODlmOTg1YzI0MjIyOWIwNjM0MzA2MjhmN2QwZTAwY2NhZSIsInRhZyI6IiJ9
+            - link "Edit Project" [ref=f15e184] [cursor=pointer]:
+              - /url: edit-project/eyJpdiI6InhCNFNBSlRXK2NKcElpcFVSRytoNXc9PSIsInZhbHVlIjoiekpBVzVSN0tXSk5PQVo1b0I4QVVuZz09IiwibWFjIjoiNmUwZTYyMjBkZGNlMDY2OGQ4NDAyZTY2M2EwMTg0ODlmOTg1YzI0MjIyOWIwNjM0MzA2MjhmN2QwZTAwY2NhZSIsInRhZyI6IiJ9
+        - generic [ref=f15e187]:
+          - generic [ref=f15e189]:
+            - img "img" [ref=f15e191]
+            - generic [ref=f15e194]:
+              - heading "Demo Mohammed" [level=6] [ref=f15e195]:
+                - generic [ref=f15e196]: Demo Mohammed
+              - generic [ref=f15e198]: "Project Owner: POA"
+              - generic [ref=f15e200]:
+                - generic [ref=f15e201]:
+                  - checkbox
+                - paragraph [ref=f15e204]: Ability to Delete Work Orders
+          - generic [ref=f15e206]:
+            - link "Enter Project" [ref=f15e207] [cursor=pointer]:
+              - /url: enter/eyJpdiI6IjNXT1NaWXkwbUtNYm1EaTB1QmVacnc9PSIsInZhbHVlIjoiK2ZlZGNKTnltbTdGNzRJQysyc3V3QT09IiwibWFjIjoiYjMyNTQxYzY2Mzc2N2E3YjZmMTUzMjg2MzE2NzQyNWYyZWZlOTAxYmQ1ZTIzYzU5NjhmZjcxYWI4NWI3OWFkOCIsInRhZyI6IiJ9
+            - link "Edit Project" [ref=f15e208] [cursor=pointer]:
+              - /url: edit-project/eyJpdiI6IjNXT1NaWXkwbUtNYm1EaTB1QmVacnc9PSIsInZhbHVlIjoiK2ZlZGNKTnltbTdGNzRJQysyc3V3QT09IiwibWFjIjoiYjMyNTQxYzY2Mzc2N2E3YjZmMTUzMjg2MzE2NzQyNWYyZWZlOTAxYmQ1ZTIzYzU5NjhmZjcxYWI4NWI3OWFkOCIsInRhZyI6IiJ9
+        - generic [ref=f15e211]:
+          - generic [ref=f15e213]:
+            - img "img" [ref=f15e215]
+            - generic [ref=f15e218]:
+              - heading "Fidaa Project2" [level=6] [ref=f15e219]:
+                - generic [ref=f15e220]: Fidaa Project2
+              - generic [ref=f15e222]: "Project Owner:"
+              - generic [ref=f15e224]:
+                - generic [ref=f15e225]:
+                  - checkbox
+                - paragraph [ref=f15e228]: Ability to Delete Work Orders
+          - generic [ref=f15e230]:
+            - link "Enter Project" [ref=f15e231] [cursor=pointer]:
+              - /url: enter/eyJpdiI6Ik1RNTgzTnM3S24xT0pZZllMZFBFRWc9PSIsInZhbHVlIjoiemZpaWhhL2JrS2czWVFoNXFXR1FRZz09IiwibWFjIjoiYzliMWEyOTc5NzVlOGU4MzVlY2M1OGMxOTNkY2JkMzk4NTA3OTFlMGRlNDgwYzZhZDE4ZTI1MjAxYWFkNWI2NiIsInRhZyI6IiJ9
+            - link "Edit Project" [ref=f15e232] [cursor=pointer]:
+              - /url: edit-project/eyJpdiI6Ik1RNTgzTnM3S24xT0pZZllMZFBFRWc9PSIsInZhbHVlIjoiemZpaWhhL2JrS2czWVFoNXFXR1FRZz09IiwibWFjIjoiYzliMWEyOTc5NzVlOGU4MzVlY2M1OGMxOTNkY2JkMzk4NTA3OTFlMGRlNDgwYzZhZDE4ZTI1MjAxYWFkNWI2NiIsInRhZyI6IiJ9
+        - generic [ref=f15e235]:
+          - generic [ref=f15e237]:
+            - img "img" [ref=f15e239]
+            - generic [ref=f15e242]:
+              - heading "Category Project" [level=6] [ref=f15e243]:
+                - generic [ref=f15e244]: Category Project
+              - generic [ref=f15e246]: "Project Owner: category poa"
+              - generic [ref=f15e248]:
+                - generic [ref=f15e249]:
+                  - checkbox
+                - paragraph [ref=f15e252]: Ability to Delete Work Orders
+          - generic [ref=f15e254]:
+            - link "Enter Project" [ref=f15e255] [cursor=pointer]:
+              - /url: enter/eyJpdiI6IklLcThPdHBkUTVvbEdCemgrbllBZ1E9PSIsInZhbHVlIjoiK2lscHNVaUUwTmRCMHZnS0NhOGE1Zz09IiwibWFjIjoiOWMxNmQwZWZlYmJkNDNhZDNhNmVlYTE4ZTI2N2EwMDYwNzgwNmNmZDViYTcyMDczNDNhMGVmYzhiNDI3ZGI0YiIsInRhZyI6IiJ9
+            - link "Edit Project" [ref=f15e256] [cursor=pointer]:
+              - /url: edit-project/eyJpdiI6IklLcThPdHBkUTVvbEdCemgrbllBZ1E9PSIsInZhbHVlIjoiK2lscHNVaUUwTmRCMHZnS0NhOGE1Zz09IiwibWFjIjoiOWMxNmQwZWZlYmJkNDNhZDNhNmVlYTE4ZTI2N2EwMDYwNzgwNmNmZDViYTcyMDczNDNhMGVmYzhiNDI3ZGI0YiIsInRhZyI6IiJ9
+        - generic [ref=f15e259]:
+          - generic [ref=f15e261]:
+            - img "img" [ref=f15e263]
+            - generic [ref=f15e266]:
+              - heading "Fidaa Project" [level=6] [ref=f15e267]:
+                - generic [ref=f15e268]: Fidaa Project
+              - generic [ref=f15e270]: "Project Owner:"
+              - generic [ref=f15e272]:
+                - generic [ref=f15e273]:
+                  - checkbox
+                - paragraph [ref=f15e276]: Ability to Delete Work Orders
+          - generic [ref=f15e278]:
+            - link "Enter Project" [ref=f15e279] [cursor=pointer]:
+              - /url: enter/eyJpdiI6Im51YjVIdFYyUkdBVG03c0dPQkJVRWc9PSIsInZhbHVlIjoiejlNQlZPcVZvVlJHTEt5R2FoUUtSUT09IiwibWFjIjoiZTRlOWNhNTc3YjUzNWE3NzM2MWQ5NmZjZDMwMTFiMThjZDQ0NDM3YjJjNDkzNmFhYWQ0MjY4YWU3OWEzMDM1ZSIsInRhZyI6IiJ9
+            - link "Edit Project" [ref=f15e280] [cursor=pointer]:
+              - /url: edit-project/eyJpdiI6Im51YjVIdFYyUkdBVG03c0dPQkJVRWc9PSIsInZhbHVlIjoiejlNQlZPcVZvVlJHTEt5R2FoUUtSUT09IiwibWFjIjoiZTRlOWNhNTc3YjUzNWE3NzM2MWQ5NmZjZDMwMTFiMThjZDQ0NDM3YjJjNDkzNmFhYWQ0MjY4YWU3OWEzMDM1ZSIsInRhZyI6IiJ9
+      - navigation [ref=f15e285]:
+        - list [ref=f15e286]:
+          - listitem [ref=f15e287]:
+            - link "" [ref=f15e288] [cursor=pointer]:
+              - /url: null&search_text=
+              - generic [ref=f15e290]: 
+            - link "1" [ref=f15e291] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=1&search_text=
+              - generic [ref=f15e292]: "1"
+            - link "2" [ref=f15e293] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=2&search_text=
+              - generic [ref=f15e294]: "2"
+            - link "3" [ref=f15e295] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=3&search_text=
+              - generic [ref=f15e296]: "3"
+            - link "4" [ref=f15e297] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=4&search_text=
+              - generic [ref=f15e298]: "4"
+            - link "5" [ref=f15e299] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=5&search_text=
+              - generic [ref=f15e300]: "5"
+            - link "6" [ref=f15e301] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=6&search_text=
+              - generic [ref=f15e302]: "6"
+            - link "7" [ref=f15e303] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=7&search_text=
+              - generic [ref=f15e304]: "7"
+            - link "8" [ref=f15e305] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=8&search_text=
+              - generic [ref=f15e306]: "8"
+            - link "9" [ref=f15e307] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=9&search_text=
+              - generic [ref=f15e308]: "9"
+            - link "10" [ref=f15e309] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=10&search_text=
+              - generic [ref=f15e310]: "10"
+            - link "..." [ref=f15e311] [cursor=pointer]:
+              - /url: null&search_text=
+              - generic [ref=f15e312]: ...
+            - link "25" [ref=f15e313] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=25&search_text=
+              - generic [ref=f15e314]: "25"
+            - link "26" [ref=f15e315] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=26&search_text=
+              - generic [ref=f15e316]: "26"
+            - link "" [ref=f15e317] [cursor=pointer]:
+              - /url: https://test.osool.cloud/workspace/adminProjectsListAjax?page=2&search_text=
+              - generic [ref=f15e319]: 
+    - text:  
+    - paragraph [ref=f15e326]:
+      - text: 2026 @
+      - link "Osool" [ref=f15e327] [cursor=pointer]:
+        - /url: https://test.osool.cloud/dashboards/admin

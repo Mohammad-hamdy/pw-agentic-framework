@@ -1,0 +1,34 @@
+- main [ref=e2]:
+  - generic [ref=e12]:
+    - generic [ref=e18]:
+      - img "Osool" [ref=e21]
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - generic [ref=e25]:
+            - generic [ref=e26]: البريد الإلكتروني
+            - textbox "البريد الإلكتروني" [ref=e27]
+          - generic [ref=e28]:
+            - generic [ref=e29]: كلمة السر
+            - generic [ref=e30]:
+              - generic [ref=e31]: 
+              - textbox "كلمة السر" [ref=e32]:
+                - /placeholder: "********"
+          - button "تسجيل الدخول" [ref=e34] [cursor=pointer]
+        - paragraph [ref=e35]: أو
+        - list [ref=e37]:
+          - listitem [ref=e38]:
+            - list [ref=e39]:
+              - link "English" [ref=e40] [cursor=pointer]:
+                - /url: https://test.osool.cloud/language/en
+          - listitem [ref=e41]:
+            - link " العودة إلى القائمة الرئيسية" [ref=e42] [cursor=pointer]:
+              - /url: https://test.osool.cloud
+              - generic [ref=e43]: 
+              - text: العودة إلى القائمة الرئيسية
+            - link "هل نسيت كلمة السر ؟" [ref=e44] [cursor=pointer]:
+              - /url: https://test.osool.cloud/password/reset
+    - generic [ref=e47]:
+      - img "Osool Logo" [ref=e49]
+      - generic [ref=e52]:
+        - paragraph [ref=e53]: مع المساحة الخاصة بك
+        - heading "قم بتوسيع نطاق أعمالك العقارية مع أصول" [level=1] [ref=e54]

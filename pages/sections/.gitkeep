@@ -1,0 +1,3 @@
+# Sub-page "section" Page Objects live here (e.g. HeaderSection.ts, a shared
+# component reused across multiple pages). Mirrors the sections/ pattern from
+# the reference framework.

@@ -1,0 +1,3 @@
+# The planner agent writes evidence-based test plans here (one .plan.md per
+# story). A plan must be reviewed and approved by QA before the generator agent
+# turns it into POM classes and spec files.

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form id="login-form">
+      <label for="username">Username</label>
+      <input data-testid="username" id="username" type="text" />
+
+      <label for="password">Password</label>
+      <input data-testid="password" id="password" type="password" />
+
+      <button data-testid="login-button" type="button" onclick="doLogin()">Log in</button>
+    </form>
+
+    <div data-testid="success-message" id="success" style="display: none">Login successful</div>
+    <div data-testid="error-message" id="error" style="display: none">Invalid credentials</div>
+
+    <script>
+      function doLogin() {
+        var user = document.querySelector('[data-testid="username"]').value;
+        var pass = document.querySelector('[data-testid="password"]').value;
+        var ok = user === 'student' && pass === 'Password123';
+        document.getElementById('success').style.display = ok ? 'block' : 'none';
+        document.getElementById('error').style.display = ok ? 'none' : 'block';
+      }
+    </script>
+  </body>
+</html>

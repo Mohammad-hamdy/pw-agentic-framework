@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic QE Framework — Team Onboarding</title>
+</head>
+<body>
+<style>
+  :root {
+    --font-sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: "Cascadia Code", "JetBrains Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", monospace;
+
+    /* Light theme (cool-slate neutrals, deep-teal accent, testing semantics) */
+    --bg: #EEF1F4;
+    --stage: #FBFCFD;
+    --surface: #FFFFFF;
+    --surface-2: #F0F3F6;
+    --ink: #111820;
+    --ink-soft: #4C5762;
+    --ink-faint: #7A8590;
+    --line: #DBE1E8;
+    --line-soft: #E7ECF1;
+    --accent: #0C8C7B;
+    --accent-ink: #0A6A5D;
+    --accent-wash: #DCF1ED;
+    --pass: #1E9E6A;
+    --gate: #B77A18;
+    --gate-wash: #F6ECD6;
+    --fail: #CE4049;
+    --code-bg: #0E1620;
+    --code-ink: #D6E2EC;
+    --code-line: #223042;
+    --shadow: 0 1px 2px rgba(16,24,32,.06), 0 12px 34px -14px rgba(16,24,32,.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #080B0E;
+      --stage: #10161C;
+      --surface: #171F27;
+      --surface-2: #1D2731;
+      --ink: #E9EEF3;
+      --ink-soft: #A0ACB8;
+      --ink-faint: #6E7B87;
+      --line: #26313B;
+      --line-soft: #202a33;
+      --accent: #26C9AD;
+      --accent-ink: #6FE3CE;
+      --accent-wash: #10312C;
+      --pass: #34D399;
+      --gate: #E3A94A;
+      --gate-wash: #2C2413;
+      --fail: #F0616B;
+      --code-bg: #0A1119;
+      --code-ink: #CBD8E4;
+      --code-line: #1C2A38;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 40px -18px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #EEF1F4; --stage: #FBFCFD; --surface: #FFFFFF; --surface-2: #F0F3F6;
+    --ink: #111820; --ink-soft: #4C5762; --ink-faint: #7A8590; --line: #DBE1E8; --line-soft: #E7ECF1;
+    --accent: #0C8C7B; --accent-ink: #0A6A5D; --accent-wash: #DCF1ED;
+    --pass: #1E9E6A; --gate: #B77A18; --gate-wash: #F6ECD6; --fail: #CE4049;
+    --code-bg: #0E1620; --code-ink: #D6E2EC; --code-line: #223042;
+    --shadow: 0 1px 2px rgba(16,24,32,.06), 0 12px 34px -14px rgba(16,24,32,.28);
+  }
+  :root[data-theme="dark"] {
+    --bg: #080B0E; --stage: #10161C; --surface: #171F27; --surface-2: #1D2731;
+    --ink: #E9EEF3; --ink-soft: #A0ACB8; --ink-faint: #6E7B87; --line: #26313B; --line-soft: #202a33;
+    --accent: #26C9AD; --accent-ink: #6FE3CE; --accent-wash: #10312C;
+    --pass: #34D399; --gate: #E3A94A; --gate-wash: #2C2413; --fail: #F0616B;
+    --code-bg: #0A1119; --code-ink: #CBD8E4; --code-line: #1C2A38;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 40px -18px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .app {
+    height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(10px, 2vw, 22px);
+    gap: clamp(8px, 1.4vw, 14px);
+  }
+
+  /* Top bar */
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); letter-spacing: .02em; }
+  .brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-wash); }
+  .brand b { color: var(--ink); font-weight: 600; }
+  .bar-right { display: flex; align-items: center; gap: 10px; }
+  .counter { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .counter b { color: var(--ink); }
+  .tbtn {
+    appearance: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft);
+    width: 34px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 14px; display: grid; place-items: center;
+    transition: border-color .15s, color .15s;
+  }
+  .tbtn:hover { color: var(--ink); border-color: var(--accent); }
+
+  /* Stage / slides */
+  .stage {
+    position: relative;
+    background: var(--stage);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute; inset: 0;
+    padding: clamp(20px, 3.4vw, 52px);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity .38s ease, transform .38s ease, visibility .38s;
+    display: flex; flex-direction: column;
+  }
+  .slide.is-active { opacity: 1; visibility: visible; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .slide { transition: opacity .001s; transform: none; }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent-ink); font-weight: 600; display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow .num { color: var(--ink-faint); }
+  .eyebrow::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--line), transparent); }
+
+  h1.title { font-size: clamp(30px, 5.4vw, 60px); line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 0; font-weight: 800; text-wrap: balance; }
+  h2 { font-size: clamp(24px, 3.6vw, 40px); line-height: 1.08; letter-spacing: -.015em; margin: 14px 0 4px; font-weight: 750; text-wrap: balance; }
+  .lede { font-size: clamp(15px, 1.7vw, 19px); color: var(--ink-soft); max-width: 62ch; margin: 6px 0 0; }
+  p { margin: 0; }
+  .spacer { flex: 1; }
+
+  .grid { display: grid; gap: 14px; }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 760px) { .cols-2, .cols-3 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .card h3 { margin: 0; font-size: 16px; font-weight: 650; letter-spacing: -.01em; display: flex; align-items: center; gap: 9px; }
+  .card p { font-size: 14px; color: var(--ink-soft); }
+  .card .k { font-family: var(--font-mono); font-size: 12px; color: var(--accent-ink); }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11.5px;
+    padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-soft); background: var(--surface-2);
+    letter-spacing: .01em; white-space: nowrap;
+  }
+  .chip.pass { color: var(--pass); border-color: color-mix(in srgb, var(--pass) 40%, var(--line)); background: color-mix(in srgb, var(--pass) 12%, transparent); }
+  .chip.gate { color: var(--gate); border-color: color-mix(in srgb, var(--gate) 45%, var(--line)); background: var(--gate-wash); }
+  .chip.accent { color: var(--accent-ink); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); background: var(--accent-wash); }
+
+  code, .mono { font-family: var(--font-mono); }
+  .inline { font-family: var(--font-mono); font-size: .88em; background: var(--surface-2); border: 1px solid var(--line-soft); border-radius: 5px; padding: 1px 6px; color: var(--ink); }
+
+  .terminal {
+    background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 11px; overflow: hidden;
+    font-family: var(--font-mono); box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+  }
+  .terminal .tt { display: flex; align-items: center; gap: 7px; padding: 9px 13px; border-bottom: 1px solid var(--code-line); }
+  .terminal .tt i { width: 10px; height: 10px; border-radius: 50%; background: #33404e; }
+  .terminal .tt span { font-size: 11.5px; color: #7d8da0; margin-left: 6px; }
+  .terminal pre { margin: 0; padding: 14px 16px; overflow-x: auto; font-size: 13px; line-height: 1.7; color: var(--code-ink); }
+  .terminal .c { color: #6E8196; }         /* comment */
+  .terminal .p { color: #4ec9b0; }          /* prompt / accent */
+  .terminal .g { color: #7ec98f; }          /* good */
+  .terminal .a { color: #e0a44a; }          /* attention */
+  .terminal .f { color: #e5808a; }          /* fail */
+  .terminal .s { color: #9cc0e0; }          /* string/path */
+
+  ul.clean { margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  ul.clean li { position: relative; padding-left: 24px; font-size: 14.5px; color: var(--ink-soft); }
+  ul.clean li b { color: var(--ink); font-weight: 600; }
+  ul.clean li::before { content: ""; position: absolute; left: 4px; top: 8px; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+  ul.clean.gate li::before { background: var(--gate); }
+
+  /* Pipeline */
+  .pipe { display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; margin-top: 8px; }
+  .stagebox {
+    flex: 1 1 0; min-width: 128px; background: var(--surface); border: 1px solid var(--line); border-radius: 11px;
+    padding: 14px 12px; display: flex; flex-direction: column; gap: 5px; position: relative;
+  }
+  .stagebox .sn { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); }
+  .stagebox h4 { margin: 0; font-size: 14.5px; font-weight: 650; }
+  .stagebox small { font-size: 12px; color: var(--ink-soft); }
+  .stagebox.gatemark { border-color: color-mix(in srgb, var(--gate) 55%, var(--line)); background: var(--gate-wash); }
+  .arrow { align-self: center; color: var(--ink-faint); font-family: var(--font-mono); padding: 0 6px; font-size: 15px; }
+  @media (max-width: 820px) { .pipe { flex-direction: column; } .arrow { transform: rotate(90deg); padding: 4px 0; } }
+
+  .tree { font-family: var(--font-mono); font-size: 13px; line-height: 1.75; color: var(--ink-soft); }
+  .tree .d { color: var(--accent-ink); }
+  .tree .m { color: var(--ink-faint); }
+
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-size: 14px; }
+  .kv dt { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-ink); }
+  .kv dd { margin: 0; color: var(--ink-soft); }
+
+  .callout {
+    border-left: 3px solid var(--gate); background: var(--gate-wash); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; color: var(--ink-soft);
+  }
+  .callout b { color: var(--ink); }
+  .callout.accent { border-color: var(--accent); background: var(--accent-wash); }
+
+  .metricrow { display: flex; gap: 12px; flex-wrap: wrap; }
+  .metric { background: var(--surface); border: 1px solid var(--line); border-radius: 11px; padding: 12px 16px; min-width: 108px; }
+  .metric .n { font-size: 26px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .metric .l { font-size: 11.5px; color: var(--ink-faint); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+  .metric.good .n { color: var(--pass); }
+
+  /* Controls */
+  .controls { display: flex; align-items: center; gap: 14px; }
+  .progress { flex: 1; height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .progress > i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width .38s ease; }
+  .dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; max-width: 42%; }
+  .dots button { width: 9px; height: 9px; padding: 0; border-radius: 50%; border: none; background: var(--line); cursor: pointer; transition: background .15s, transform .15s; }
+  .dots button:hover { background: var(--ink-faint); }
+  .dots button.on { background: var(--accent); transform: scale(1.25); }
+  .nav { display: flex; gap: 8px; }
+  .nav button {
+    appearance: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    height: 36px; padding: 0 15px; border-radius: 9px; cursor: pointer; font-size: 13.5px; font-weight: 550;
+    display: inline-flex; align-items: center; gap: 7px; transition: border-color .15s, background .15s;
+  }
+  .nav button:hover { border-color: var(--accent); }
+  .nav button:disabled { opacity: .4; cursor: default; }
+  .nav button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .nav button.primary, .nav button.primary { color: #04120F; }
+  button:focus-visible, .dots button:focus-visible, .tbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .hint { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-align: center; margin-top: 2px; }
+  kbd { font-family: var(--font-mono); font-size: 11px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; color: var(--ink-soft); background: var(--surface); }
+
+  .cover-mark { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .cover-mark .sep { color: var(--line); }
+  .lang { display: inline-flex; gap: 6px; align-items: center; }
+</style>
+
+<div class="app">
+  <header class="bar">
+    <div class="brand"><span class="dot"></span> <b>pw-agentic-framework</b> <span class="sep" style="color:var(--line)">/</span> team onboarding</div>
+    <div class="bar-right">
+      <div class="counter"><b id="cur">01</b> / <span id="tot">18</span></div>
+      <button class="tbtn" id="theme" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button>
+    </div>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <!-- 1 · COVER -->
+    <section class="slide is-active">
+      <div class="eyebrow">Playwright · TypeScript · Claude agents</div>
+      <h1 class="title">You describe the requirement.<br>The agents build the tests.</h1>
+      <p class="lede">A step-by-step guide to our agentic QE framework — how the team turns a user story or Jira issue into Page-Object test suites, runs them, and self-heals failures, with human approval at every gate.</p>
+      <div class="spacer"></div>
+      <div class="cover-mark">
+        <span>intake</span><span class="sep">→</span><span>plan</span><span class="sep">→</span>
+        <span class="chip gate">approve</span><span class="sep">→</span><span>generate</span><span class="sep">→</span>
+        <span>run</span><span class="sep">→</span><span>heal</span>
+      </div>
+    </section>
+
+    <!-- 2 · THE IDEA -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">01</span> The idea in one screen</div>
+      <h2>Automation that starts from intent, not from code</h2>
+      <div class="grid cols-2" style="margin-top:14px">
+        <div class="card">
+          <h3>The old way</h3>
+          <p>Read the story → hand-write locators → hand-write a Page Object → hand-write a spec → debug flakiness → repeat for every language. Hours per feature, brittle by Friday.</p>
+        </div>
+        <div class="card" style="border-color:color-mix(in srgb, var(--accent) 40%, var(--line))">
+          <h3><span style="color:var(--accent)">◆</span> The framework way</h3>
+          <p>You supply a requirement. A <b>planner agent</b> explores the live app, proposes an evidence-based plan; you approve; a <b>generator agent</b> writes conventions-perfect code and runs it; a <b>healer agent</b> root-causes any failure.</p>
+        </div>
+      </div>
+      <div class="callout accent" style="margin-top:14px"><b>You stay in control.</b> Agents do the typing and the exploring. Humans decide <i>what</i> to test (approve the plan) and <i>whether a fix is right</i> (approve the heal). Nothing ships past you.</div>
+    </section>
+
+    <!-- 3 · PIPELINE -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">02</span> The workflow — never skip the gates</div>
+      <h2>Six stages, two human gates</h2>
+      <div class="pipe">
+        <div class="stagebox"><span class="sn">stage 1</span><h4>Intake</h4><small>Normalize the story into atomic, testable acceptance criteria.</small></div>
+        <div class="arrow">→</div>
+        <div class="stagebox"><span class="sn">stage 2</span><h4>Plan</h4><small>Explore the live app (Playwright MCP), write an evidence-based plan.</small></div>
+        <div class="arrow">→</div>
+        <div class="stagebox gatemark"><span class="sn" style="color:var(--gate)">gate</span><h4>Approve</h4><small>QA reviews & approves the plan before any code exists.</small></div>
+        <div class="arrow">→</div>
+        <div class="stagebox"><span class="sn">stage 3</span><h4>Generate</h4><small>Page Objects + specs + locales + data, then run via the CLI.</small></div>
+        <div class="arrow">→</div>
+        <div class="stagebox"><span class="sn">stage 4</span><h4>Run + Report</h4><small>Execute by tag / language; read results in Allure.</small></div>
+        <div class="arrow">→</div>
+        <div class="stagebox gatemark"><span class="sn" style="color:var(--gate)">gate</span><h4>Heal</h4><small>Diagnose failure; approve the fix before it is applied.</small></div>
+      </div>
+      <div class="callout" style="margin-top:16px">The <b>gates are non-negotiable</b>. The planner never writes code; the healer never applies a fix, until a human says go.</div>
+    </section>
+
+    <!-- 4 · WHY GATES -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">03</span> Why the gates matter</div>
+      <h2>Two moments where a human must look</h2>
+      <div class="grid cols-2" style="margin-top:14px">
+        <div class="card">
+          <h3><span class="chip gate">gate 1</span> Approve the plan</h3>
+          <p>The planner classifies every scenario as <b>VERIFIED</b> (it saw the behavior), <b>ASSUMPTION_NEEDS_REVIEW</b>, or <b>REJECTED_UNSUPPORTED</b>. You confirm scope and the proposed locators before a single line is generated — cheap to change here, expensive later.</p>
+        </div>
+        <div class="card">
+          <h3><span class="chip gate">gate 2</span> Approve the heal</h3>
+          <p>When a test fails, the healer decides: <b>application bug</b> (report it, don't touch the test) vs <b>automation issue</b> (propose the minimal fix). You approve before the change lands — assertions are <b>never</b> weakened to force a pass.</p>
+        </div>
+      </div>
+      <div class="callout accent" style="margin-top:14px">These two gates are the difference between "AI wrote some tests" and "a QE process you can trust in CI."</div>
+    </section>
+
+    <!-- 5 · SETUP -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">04</span> One-time setup</div>
+      <h2>Get the project ready</h2>
+      <div class="grid cols-2" style="margin-top:12px; align-items:start">
+        <div class="terminal">
+          <div class="tt"><i></i><i></i><i></i><span>bash — first run</span></div>
+<pre><span class="c"># install deps + browsers</span>
+npm install
+npx playwright install
+<span class="c"># optional: Allure HTML reports need Java</span>
+java -version
+
+<span class="c"># point the app + creds at your env</span>
+config/.env.testing</pre>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <div class="card">
+            <h3>Environment file <span class="k">config/.env.&lt;env&gt;</span></h3>
+            <p>Set <span class="inline">BASE_URL</span>, <span class="inline">LANGUAGE</span> (<span class="inline">en</span>/<span class="inline">ar</span>), and secrets like passwords. Select env with <span class="inline">ENV</span>, device with <span class="inline">PLATFORM_TYPE</span>.</p>
+          </div>
+          <div class="card">
+            <h3>MCP servers <span class="k">.mcp.json</span></h3>
+            <p><b>playwright</b> auto-starts for app exploration. <b>atlassian</b> (Jira) needs a one-time <span class="inline">/mcp</span> authorization per machine before <span class="inline">/qe-from-jira</span>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">Open the project in a <b>fresh VS Code window with Claude Code</b>. That's where the slash commands and agents live.</div>
+    </section>
+
+    <!-- 6 · PROJECT MAP -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">05</span> The project map</div>
+      <h2>Where everything lives</h2>
+      <div class="grid cols-2" style="margin-top:12px; align-items:start">
+        <div class="card">
+          <div class="tree">
+<span class="d">.claude/</span>       <span class="m">agents · skills · slash commands</span>
+<span class="d">pages/</span>         <span class="m">Page Objects (POM)</span>
+  <span class="d">action-healing/</span> <span class="m">web-util.ts</span>
+  <span class="d">sections/</span>   <span class="m">reusable UI sections</span>
+<span class="d">tests/</span>         <span class="m">specs — ui/ and api/</span>
+<span class="d">locales/</span>       <span class="m">en/ + ar/  (en is fallback)</span>
+<span class="d">test-data/</span>     <span class="m">per-env data + fixtures</span>
+<span class="d">config/</span>        <span class="m">.env.&lt;env&gt; + loader</span>
+<span class="d">utils/tags/</span>    <span class="m">central TAGS map</span>
+<span class="d">stories/</span>       <span class="m">drop user stories (.md)</span>
+<span class="d">specs-plans/</span>   <span class="m">planner output → you approve</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <div class="card"><h3>Path aliases</h3><p><span class="inline">@pages</span> <span class="inline">@api</span> <span class="inline">@utils</span> <span class="inline">@config</span> <span class="inline">@locales</span> <span class="inline">@test-data</span> — import via these, never deep relative paths.</p></div>
+          <div class="card"><h3>The two files that rule everything</h3><p><span class="inline">CLAUDE.md</span> holds the rules every agent obeys. The <span class="inline">.claude/skills</span> encode the POM, locator and CLI conventions the generator reads before writing.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · COMMANDS -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">06</span> The three commands you'll use</div>
+      <h2>Everything runs through a slash command</h2>
+      <div class="grid cols-3" style="margin-top:14px">
+        <div class="card">
+          <h3 class="mono" style="font-size:15px">/qe-from-story</h3>
+          <p>Author tests from a user story — a file under <span class="inline">stories/</span> or pasted inline text.</p>
+          <span class="chip accent" style="margin-top:6px">most common</span>
+        </div>
+        <div class="card">
+          <h3 class="mono" style="font-size:15px">/qe-from-jira</h3>
+          <p>Fetch a Jira issue by key via the Atlassian MCP, then author tests from it.</p>
+          <span class="chip">needs /mcp auth</span>
+        </div>
+        <div class="card">
+          <h3 class="mono" style="font-size:15px">/qe-heal</h3>
+          <p>Diagnose a failing spec or trace and fix it — or report it as an application bug.</p>
+          <span class="chip gate">approval gate</span>
+        </div>
+      </div>
+      <div class="terminal" style="margin-top:16px">
+        <div class="tt"><i></i><i></i><i></i><span>Claude Code — VS Code</span></div>
+<pre><span class="p">›</span> /qe-from-story stories/example-login.md
+<span class="p">›</span> /qe-from-jira SCRUM-142
+<span class="p">›</span> /qe-heal tests/ui/login.spec.ts</pre>
+      </div>
+    </section>
+
+    <!-- 8 · STEP 1 INTAKE -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">step 1</span> Intake — bring a requirement</div>
+      <h2>Normalize the story into testable criteria</h2>
+      <p class="lede">The <span class="inline">story-intake</span> skill turns any source — pasted text, a <span class="inline">stories/*.md</span> file, or a Jira issue — into one consistent shape: atomic, testable acceptance criteria the planner can consume.</p>
+      <div class="grid cols-2" style="margin-top:14px; align-items:start">
+        <div class="terminal">
+          <div class="tt"><i></i><i></i><i></i><span>stories/example-login.md</span></div>
+<pre><span class="s">As a</span> registered user
+<span class="s">I want to</span> sign in with email + password
+<span class="s">So that</span> I reach my workspace.
+
+<span class="a">Acceptance criteria</span>
+- valid credentials → land on workspace
+- invalid credentials → inline error
+- empty email → submission blocked
+- UI available in English + Arabic</pre>
+        </div>
+        <ul class="clean">
+          <li><b>Every criterion is atomic.</b> Compound ones get split so each maps to one test.</li>
+          <li><b>Missing criteria become open questions</b> — the agent flags them, it never invents requirements.</li>
+          <li><b>The source id is preserved</b> (e.g. <span class="inline">SCRUM-142</span>) so traceability tags survive into the test titles.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 9 · STEP 2 PLAN -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">step 2</span> Plan — explore the live app</div>
+      <h2>Evidence, not assumptions</h2>
+      <p class="lede">The <span class="inline">pw-test-planner</span> opens the real app with the Playwright MCP, inspects the DOM, and captures the exact locators and behaviors. It writes a plan to <span class="inline">specs-plans/&lt;slug&gt;.plan.md</span> — and writes <b>no test code</b>.</p>
+      <div class="grid cols-2" style="margin-top:14px; align-items:start">
+        <ul class="clean">
+          <li><b>Real locators</b>, chosen by the priority ladder and proven against the live DOM.</li>
+          <li><b>Real behaviors</b> — it confirms what the app actually does vs what the story assumes.</li>
+          <li><b>Every scenario classified</b> VERIFIED / NEEDS_REVIEW / REJECTED, with the evidence it saw.</li>
+          <li><b>Open questions for QA</b> surfaced up front.</li>
+        </ul>
+        <div class="terminal">
+          <div class="tt"><i></i><i></i><i></i><span>specs-plans/osool-login.plan.md</span></div>
+<pre><span class="a">[OSOOL-LOGIN-01]</span> valid login → /workspace/projects
+  <span class="g">VERIFIED</span> · @smoke @login @p0
+<span class="a">[OSOOL-LOGIN-02]</span> invalid creds → #loginMessage
+  <span class="g">VERIFIED</span> · @regression @login @p1
+<span class="c"># evidence: email #email · pass #password-field</span>
+<span class="c"># login btn button.signIn-createBtn  (NOT</span>
+<span class="c"># button[type=submit] — matches hidden OTP)</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · STEP 3 APPROVE -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">step 3</span> <span style="color:var(--gate)">Gate</span> — review &amp; approve the plan</div>
+      <h2>Your five-minute checklist</h2>
+      <div class="grid cols-2" style="margin-top:14px; align-items:start">
+        <ul class="clean gate">
+          <li><b>Scope</b> — are the right scenarios there, and nothing out of scope?</li>
+          <li><b>Classifications</b> — is anything marked VERIFIED that you doubt? Push back.</li>
+          <li><b>Locators</b> — do the proposed selectors look stable (ids/testids over positional)?</li>
+          <li><b>Data &amp; tags</b> — correct priority, correct feature tag, traceable case ids?</li>
+          <li><b>Open questions</b> — answer them before generation.</li>
+        </ul>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="callout"><b>Approve</b> by telling Claude to proceed. Only then does <span class="inline">pw-test-generator</span> run.</div>
+          <div class="card"><h3>Nothing is generated yet</h3><p>At this point the repo has a plan file and your comments — zero test code. Changing direction is free.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · STEP 4 GENERATE -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">step 4</span> Generate — from the approved plan</div>
+      <h2>Conventions-perfect code, written for you</h2>
+      <p class="lede">The <span class="inline">pw-test-generator</span> produces a full, runnable slice and then executes it — Page Object, spec, both locale files, and test data, each following the POM conventions exactly.</p>
+      <div class="grid cols-2" style="margin-top:14px; align-items:start">
+        <div class="card">
+          <div class="tree">
+<span class="d">pages/</span>LoginPage.ts        <span class="m">POM class</span>
+<span class="d">tests/ui/</span>login.spec.ts    <span class="m">the scenarios</span>
+<span class="d">locales/en/</span>login.ts       <span class="m">strings (fallback)</span>
+<span class="d">locales/ar/</span>login.ts       <span class="m">matching keys</span>
+<span class="d">test-data/</span>testing/…       <span class="m">data + secrets via env</span>
+          </div>
+        </div>
+        <ul class="clean">
+          <li><b>POM only</b> — one class per page, mandatory member order.</li>
+          <li><b>Every action via WebUtil</b> — never <span class="inline">page.click</span> directly.</li>
+          <li><b>Strings from getLocale()</b> — en + ar kept in lockstep.</li>
+          <li><b>Tags from utils/tags</b>, titles as <span class="inline">[caseId] validate that …</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 12 · STEP 5 RUN -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">step 5</span> Run — by tag, title, language, device</div>
+      <h2>Execute the suite</h2>
+      <div class="terminal" style="margin-top:12px">
+        <div class="tt"><i></i><i></i><i></i><span>bash</span></div>
+<pre>npx playwright test                        <span class="c"># everything</span>
+npx playwright test tests/ui/login.spec.ts <span class="c"># one file</span>
+npx playwright test --grep <span class="s">@smoke</span>          <span class="c"># by tag</span>
+<span class="p">LANGUAGE=ar</span> npx playwright test            <span class="c"># run the Arabic pass</span>
+npm run test:smoke   <span class="c">·</span>   npm run typecheck</pre>
+      </div>
+      <div class="grid cols-3" style="margin-top:16px">
+        <div class="card"><h3>Tags</h3><p><span class="inline">@smoke @regression</span> · <span class="inline">@p0…@p2</span> · <span class="inline">@login @ui</span></p></div>
+        <div class="card"><h3>Localization</h3><p><span class="inline">LANGUAGE</span> drives both the app UI and the asserted strings — same suite, both languages.</p></div>
+        <div class="card"><h3>Platform</h3><p><span class="inline">PLATFORM_TYPE=</span><span class="inline">desktop</span>/<span class="inline">mobile</span>/<span class="inline">both</span></p></div>
+      </div>
+    </section>
+
+    <!-- 13 · STEP 6 ALLURE -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">step 6</span> Report — read the results in Allure</div>
+      <h2>Rich, shareable test reporting</h2>
+      <div class="grid cols-2" style="margin-top:12px; align-items:start">
+        <div class="terminal">
+          <div class="tt"><i></i><i></i><i></i><span>bash</span></div>
+<pre>npm test                 <span class="c"># writes allure-results/</span>
+npm run allure:serve     <span class="c"># generate + open</span>
+<span class="c"># or split:</span>
+npm run allure:generate
+npm run allure:open</pre>
+        </div>
+        <ul class="clean">
+          <li><b>Pass / fail totals</b> and history at a glance.</li>
+          <li><b>Environment panel</b> — ENV, LANGUAGE, PLATFORM, BASE_URL captured automatically.</li>
+          <li><b>Tags mapped</b> — filter by <span class="inline">@smoke</span>, <span class="inline">@login</span>, priority.</li>
+          <li><b>On failure</b> — screenshot, video and trace attached to the test.</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:14px">Allure runs a local web server (the report uses <span class="inline">fetch</span>) — open the printed <span class="inline">http://localhost</span> URL. Needs Java on the PATH.</div>
+    </section>
+
+    <!-- 14 · STEP 7 HEAL -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">step 7</span> <span style="color:var(--gate)">Gate</span> — heal a failure</div>
+      <h2>Root cause first, fix second</h2>
+      <p class="lede">Run <span class="inline">/qe-heal &lt;spec-or-trace&gt;</span>. The healer reads the error, trace and screenshots, then classifies the failure before proposing anything.</p>
+      <div class="grid cols-2" style="margin-top:14px">
+        <div class="card">
+          <h3><span class="chip" style="color:var(--fail);border-color:var(--fail)">app bug</span></h3>
+          <p>The application is wrong. The healer <b>reports it</b> with evidence and does <b>not</b> alter the test. You file the bug.</p>
+        </div>
+        <div class="card">
+          <h3><span class="chip accent">automation issue</span></h3>
+          <p>The test is wrong — a brittle locator, a missing wait. The healer proposes the <b>minimal</b> fix and waits for your approval to apply it.</p>
+        </div>
+      </div>
+      <div class="callout accent" style="margin-top:14px"><b>Real example from Osool:</b> the error text flashed "Verifying credentials…" before settling → classified as an automation timing issue → fixed with a web-first auto-retrying assertion, not a weaker check.</div>
+    </section>
+
+    <!-- 15 · CONVENTIONS -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">07</span> The conventions the agents enforce</div>
+      <h2>The house rules — cheat sheet</h2>
+      <div class="grid cols-2" style="margin-top:12px; align-items:start">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card"><h3>POM structure</h3><p>Elements → constructor → fills → clicks → uploads → selects → validations. One class per page.</p></div>
+          <div class="card"><h3>WebUtil for every action</h3><p>Clicks, fills, reads route through <span class="inline">WebUtil</span> — it handles loader waits + step logging.</p></div>
+          <div class="card"><h3>Localization</h3><p>Strings via <span class="inline">getLocale('feature')</span>. Matching <span class="inline">en</span>/<span class="inline">ar</span> keys; <span class="inline">en</span> is the fallback.</p></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card"><h3>Locator priority</h3><p class="mono" style="font-size:12.5px;color:var(--ink-soft)">data-testid → CSS → semantic XPath → localized XPath</p><p>Banned: absolute XPath, deep <span class="inline">nth-child</span>.</p></div>
+          <div class="card"><h3>Tags &amp; titles</h3><p>Tags from <span class="inline">utils/tags/tags.ts</span> — never hardcode. Titles: <span class="inline">[caseId] validate that …</span></p></div>
+          <div class="card"><h3>Never weaken assertions</h3><p>A fix that makes a test pass by asserting less is not a fix. Ever.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · WORKED EXAMPLE -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">08</span> Worked example — Osool login</div>
+      <h2>What a real run looks like</h2>
+      <p class="lede">We applied the whole flow to <span class="inline">test.osool.cloud/login</span> — all login scenarios, in both languages.</p>
+      <div class="metricrow" style="margin-top:16px">
+        <div class="metric good"><div class="n">8 / 8</div><div class="l">passing</div></div>
+        <div class="metric"><div class="n">4</div><div class="l">scenarios</div></div>
+        <div class="metric"><div class="n">2</div><div class="l">languages</div></div>
+        <div class="metric"><div class="n">1</div><div class="l">bug found*</div></div>
+      </div>
+      <div class="grid cols-2" style="margin-top:16px; align-items:start">
+        <ul class="clean">
+          <li><b>No data-testid on the app</b> → planner fell back to stable ids <span class="inline">#email</span>, <span class="inline">#password-field</span>.</li>
+          <li><b>Locator trap caught live</b> — <span class="inline">button[type=submit]</span> also matched a hidden OTP button; scoped to <span class="inline">button.signIn-createBtn</span>.</li>
+          <li><b>Localization proven</b> — same suite asserts English + Arabic strings.</li>
+        </ul>
+        <div class="callout">*<b>Framework fix uncovered:</b> <span class="inline">BASE_URL</span> was read before the env file loaded, so it never applied. Caught during the run and fixed with lazy config getters.</div>
+      </div>
+    </section>
+
+    <!-- 17 · DO / DON'T -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">09</span> Do &amp; don't</div>
+      <h2>Keep the process honest</h2>
+      <div class="grid cols-2" style="margin-top:14px; align-items:start">
+        <div class="card" style="border-color:color-mix(in srgb,var(--pass) 35%,var(--line))">
+          <h3><span style="color:var(--pass)">✓</span> Do</h3>
+          <ul class="clean" style="margin-top:8px">
+            <li>Read the plan before approving — it's the cheapest place to steer.</li>
+            <li>Let the planner explore the <b>live</b> app so locators are real.</li>
+            <li>Run both languages before calling a feature done.</li>
+            <li>Treat a flaky external env with retries, not weaker asserts.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color:color-mix(in srgb,var(--fail) 32%,var(--line))">
+          <h3><span style="color:var(--fail)">✕</span> Don't</h3>
+          <ul class="clean" style="margin-top:8px">
+            <li>Skip a gate to "save time" — that's where trust is built.</li>
+            <li>Hand-edit generated locators inline in a spec.</li>
+            <li>Hardcode strings or tags — use <span class="inline">getLocale</span> and <span class="inline">TAGS</span>.</li>
+            <li>Commit or push unless you're explicitly asked to.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · YOUR FIRST SUITE -->
+    <section class="slide">
+      <div class="eyebrow"><span class="num">10</span> Start now</div>
+      <h1 class="title" style="font-size:clamp(26px,4.4vw,46px)">Build your first suite in five moves</h1>
+      <div class="grid cols-2" style="margin-top:18px; align-items:start">
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;font-size:15px">
+          <li><b>Drop a story</b> in <span class="inline">stories/</span> (or have the Jira key ready).</li>
+          <li>Run <span class="inline">/qe-from-story stories/your-story.md</span>.</li>
+          <li><b>Review the plan</b> in <span class="inline">specs-plans/</span> and approve.</li>
+          <li>Let it <b>generate &amp; run</b>; watch the CLI output.</li>
+          <li>Open <span class="inline">npm run allure:serve</span> and share the report.</li>
+        </ol>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="callout accent"><b>Stuck on a failure?</b> <span class="inline">/qe-heal &lt;spec&gt;</span> — it tells you whether it's your test or the app.</div>
+          <div class="cover-mark" style="margin-top:4px">
+            <span>intake</span><span class="sep">→</span><span>plan</span><span class="sep">→</span>
+            <span class="chip gate">approve</span><span class="sep">→</span><span>generate</span><span class="sep">→</span>
+            <span>run</span><span class="sep">→</span><span>heal</span>
+          </div>
+          <p class="mono" style="font-size:12px;color:var(--ink-faint)">Questions? The rules live in CLAUDE.md and .claude/skills — the same docs the agents read.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="controls-wrap">
+    <div class="controls">
+      <div class="nav">
+        <button id="prev" aria-label="Previous slide">‹ Prev</button>
+      </div>
+      <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+      <div class="dots" id="dots" role="tablist" aria-label="Slides"></div>
+      <div class="nav">
+        <button id="next" class="primary" aria-label="Next slide">Next ›</button>
+      </div>
+    </div>
+    <div class="hint">Navigate with <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd> · jump with number keys · <kbd>F</kbd> fullscreen</div>
+  </footer>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let idx = 0;
+  const bar = document.getElementById('bar');
+  const cur = document.getElementById('cur');
+  const dotsWrap = document.getElementById('dots');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const stage = document.getElementById('stage');
+  document.getElementById('tot').textContent = String(total);
+
+  const labels = ["Cover","The idea","Workflow","Why gates","Setup","Project map","Commands",
+    "Intake","Plan","Approve plan","Generate","Run","Report","Heal","Conventions","Osool example","Do & don't","Start now"];
+
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-label', (labels[i] || ('Slide ' + (i+1))));
+    b.title = (i+1) + ' · ' + (labels[i] || '');
+    b.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function go(n) {
+    idx = Math.max(0, Math.min(total - 1, n));
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+    bar.style.width = ((idx) / (total - 1) * 100) + '%';
+    cur.textContent = String(idx + 1).padStart(2, '0');
+    prev.disabled = idx === 0;
+    next.textContent = idx === total - 1 ? 'Restart' : 'Next ›';
+    stage.scrollTop = 0;
+    const active = slides[idx]; if (active) active.scrollTop = 0;
+  }
+  function nextSlide() { if (idx === total - 1) go(0); else go(idx + 1); }
+
+  prev.addEventListener('click', () => go(idx - 1));
+  next.addEventListener('click', nextSlide);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(idx - 1); }
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(total - 1);
+    else if (e.key === 'f' || e.key === 'F') { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+    else if (/^[1-9]$/.test(e.key)) go(parseInt(e.key, 10) - 1);
+  });
+
+  // Touch swipe
+  let tx = 0;
+  stage.addEventListener('touchstart', e => tx = e.changedTouches[0].clientX, {passive:true});
+  stage.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 55) { dx < 0 ? nextSlide() : go(idx - 1); }
+  }, {passive:true});
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme');
+  themeBtn.addEventListener('click', () => {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark'
+      || (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  });
+
+  go(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+- main [ref=f27e2]:
+  - generic [ref=f27e5]:
+    - generic [ref=f27e11]:
+      - img "Osool" [ref=f27e14]
+      - generic [ref=f27e16]:
+        - generic [ref=f27e17]:
+          - generic [ref=f27e18]:
+            - generic [ref=f27e19]: Email Address
+            - textbox "Email Address" [ref=f27e20]: wrong@osool.sa
+          - generic [ref=f27e21]:
+            - generic [ref=f27e22]: Password
+            - generic [ref=f27e23]:
+              - generic [ref=f27e24]: 
+              - textbox "Password" [ref=f27e25]:
+                - /placeholder: "********"
+                - text: WrongPass123
+          - generic [ref=f27e50]: These credentials do not match our records.
+          - button "Log In" [active] [ref=f27e27] [cursor=pointer]
+        - paragraph [ref=f27e28]: Or
+        - list [ref=f27e30]:
+          - listitem [ref=f27e31]:
+            - list [ref=f27e32]:
+              - link "عربي" [ref=f27e33] [cursor=pointer]:
+                - /url: https://test.osool.cloud/language/ar
+          - listitem [ref=f27e34]:
+            - link " Go back to Home" [ref=f27e35] [cursor=pointer]:
+              - /url: https://test.osool.cloud
+              - generic [ref=f27e36]: 
+              - text: Go back to Home
+            - link "Forgot password?" [ref=f27e37] [cursor=pointer]:
+              - /url: https://test.osool.cloud/password/reset
+    - generic [ref=f27e40]:
+      - img "Osool Logo" [ref=f27e42]
+      - generic [ref=f27e45]:
+        - paragraph [ref=f27e46]: With Your space
+        - heading "Scale up your property business with Osool" [level=1] [ref=f27e47]

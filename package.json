@@ -1,0 +1,56 @@
+{
+  "name": "pw-agentic-framework",
+  "version": "1.0.0",
+  "description": "Agentic Playwright + TypeScript automation framework driven by Claude agents, skills and MCP (Playwright + Jira). Generates POM-based test scripts from user stories or Jira issues.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test tests/ui",
+    "test:api": "playwright test tests/api",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "ui": "playwright test --ui",
+    "test:live": "playwright test --config=playwright.live.config.ts",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "codegen": "playwright codegen",
+    "report": "playwright show-report",
+    "trace": "playwright show-trace",
+    "typecheck": "tsc --noEmit",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "allure:serve": "allure serve allure-results",
+    "test:allure": "playwright test && npm run allure:generate"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "automation",
+    "agentic",
+    "claude",
+    "mcp",
+    "pom"
+  ],
+  "author": "QE Team",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "@types/node": "^24.7.2",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^2.15.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.5.0",
+    "dotenv": "^16.4.7",
+    "module-alias": "^2.2.3"
+  },
+  "_moduleAliases": {
+    "@pages": "./pages",
+    "@api": "./api",
+    "@utils": "./utils",
+    "@config": "./config",
+    "@locales": "./locales",
+    "@test-data": "./test-data"
+  }
+}
