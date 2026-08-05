@@ -36,7 +36,11 @@ class LoginPage {
 
   // Navigation (composite step: sets the app language, then opens the login page)
   async open(baseUrl: string, language: string): Promise<void> {
-    await this.webUtil.goto(`${baseUrl}/language/${language}`);
+    // baseUrl is the app origin (config.baseUrl normalizes BASE_URL to one).
+    // The /language route only sets the language cookie, then redirects to the
+    // slow landing page. 'commit' returns as soon as the server responds, so the
+    // landing page's subresources are never awaited (~43s -> ~0.7s, measured).
+    await this.webUtil.goto(`${baseUrl}/language/${language}`, 'commit');
     await this.webUtil.goto(`${baseUrl}/login`);
     // Wait until the form is interactive so parallel runs don't act too early.
     await this.emailTextField.waitFor({ state: 'visible' });

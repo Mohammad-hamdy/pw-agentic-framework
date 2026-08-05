@@ -35,6 +35,7 @@ export const TAGS = {
   login: '@login',
   search: '@search',
   checkout: '@checkout',
+  projects: '@projects',
 } as const;
 
 export type Tag = (typeof TAGS)[keyof typeof TAGS];

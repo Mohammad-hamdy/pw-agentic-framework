@@ -70,8 +70,21 @@ const getTestData = loadTestData();
  * imported before the .env file is loaded.
  */
 const config = {
+  /**
+   * The application origin (scheme + host), normalized. BASE_URL is documented
+   * as an origin, but a value carrying a path (e.g. ".../login") or a trailing
+   * slash would otherwise stack onto the routes Page Objects append. Normalizing
+   * once here keeps that concern out of every Page Object.
+   */
   get baseUrl(): string | undefined {
-    return process.env.BASE_URL;
+    const raw = process.env.BASE_URL;
+    if (!raw) return raw;
+    try {
+      return new URL(raw).origin;
+    } catch {
+      console.error(`BASE_URL is not a valid URL: ${raw}`);
+      return raw;
+    }
   },
   get apiUrl(): string | undefined {
     return process.env.BASE_API;

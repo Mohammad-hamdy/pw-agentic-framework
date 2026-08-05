@@ -1,0 +1,40 @@
+{
+  // Environment variables passed to every test launched from the Playwright
+  // Test Explorer (extension: ms-playwright.playwright).
+  //
+  // The extension spawns the test runner itself and does NOT inherit variables
+  // exported in a terminal, so ENV / LANGUAGE must be declared here for
+  // extension-run tests to target the right environment and language.
+  // config/config.ts reads both at module load: ENV selects config/.env.<ENV>,
+  // LANGUAGE selects the locale files and the app UI language.
+  //
+  // To switch, edit a value below and re-run the test. If a change does not
+  // seem to apply, use "Developer: Reload Window" — the extension caches the
+  // config between runs.
+  //
+  //   ENV           testing | staging          (config/.env.<ENV>)
+  //   LANGUAGE      en | ar                     (locales/<lang>, app UI language)
+  //   PLATFORM_TYPE desktop | mobile | both     (which projects[] are built)
+  //
+  // Optional overrides (defaults are usually right):
+  //   VIEWPORT_WIDTH / VIEWPORT_HEIGHT  pin the viewport; otherwise the config
+  //                                     detects this monitor's work area
+  //   TEST_TIMEOUT    per-test budget, default 60000
+  //   WEBKIT_TIMEOUT  same for Webkit, default 120000 (it runs ~2x slower)
+  //
+  // Setting PLATFORM_TYPE to "both" makes the Test Explorer's project picker
+  // list Chromium Desktop and Webkit Desktop as separate, tickable entries —
+  // that picker is how you choose the BROWSER (there is no env var for it).
+  "playwright.env": {
+    "ENV": "testing",
+    "LANGUAGE": "en",
+    "PLATFORM_TYPE": "both"
+  },
+
+  // Keeps a single browser window open across runs instead of launching a new
+  // one each time — pairs well with the maximized headed window.
+  "playwright.reuseBrowser": true,
+
+  // Open the Trace Viewer automatically after a run.
+  "playwright.showTrace": false
+}

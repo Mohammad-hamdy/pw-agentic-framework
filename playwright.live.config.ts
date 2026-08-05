@@ -1,5 +1,14 @@
-import { defineConfig } from '@playwright/test';
-import baseConfig from './playwright.config';
+import { defineConfig, PlaywrightTestConfig } from '@playwright/test';
+
+// Must be set BEFORE the base config is loaded: it reads HEADED at module load
+// time to choose between a maximized window and a fixed headless viewport.
+// `import` statements are hoisted, so the base config is pulled in with require()
+// after this assignment rather than with a top-level import.
+process.env.HEADED = '1';
+// Default pace for the live runner; SLOWMO from the shell still wins.
+process.env.SLOWMO = process.env.SLOWMO || '800';
+
+const baseConfig: PlaywrightTestConfig = require('./playwright.config').default;
 
 /**
  * Live / demo runner — opens a real (headed) browser and slows each action down
@@ -20,8 +29,8 @@ export default defineConfig({
   use: {
     ...baseConfig.use,
     headless: false,
-    launchOptions: {
-      slowMo: Number(process.env.SLOWMO || 800),
-    },
   },
+  // `projects` is inherited from baseConfig via the spread above, so the desktop
+  // project keeps its --start-maximized args and slowMo (both set from HEADED /
+  // SLOWMO, which are assigned before the base config is loaded).
 });

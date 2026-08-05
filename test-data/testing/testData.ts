@@ -14,4 +14,14 @@ export default {
     email: 'wrong@osool.sa',
     password: 'WrongPass123',
   },
+  /**
+   * Data for the "Add New Project" wizard (specs-plans/osool-add-project.plan.md).
+   * Names are timestamped to satisfy the server's name-uniqueness check and to
+   * stay recognizable if a cleanup run needs manual follow-up.
+   */
+  newProject: {
+    industryValue: '4', // "Restaurants - مطاعم"
+    generateEnglishName: (): string => `QA-AUTO-${Date.now()}`,
+    generateArabicName: (): string => `مشروع-آلي-${Date.now()}`,
+  },
 };

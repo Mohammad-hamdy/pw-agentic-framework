@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@utils/fixtures/test-fixtures';
 import LoginPage from '@pages/LoginPage';
 import configModule from '@config/config';
 import { TAGS } from '@utils/tags/tags';

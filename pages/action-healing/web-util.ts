@@ -35,8 +35,17 @@ export class WebUtil {
     await this.page.waitForLoadState('networkidle', { timeout: 300_000 });
   }
 
-  async goto(url: string): Promise<void> {
-    await this.page.goto(url);
+  /**
+   * Navigates to a URL. `waitUntil` defaults to Playwright's own default
+   * ('load'). Pass 'commit' for a route visited only for its server-side side
+   * effect (e.g. a language switch that sets a cookie and redirects), where
+   * waiting on the destination page's subresources is wasted time.
+   */
+  async goto(
+    url: string,
+    waitUntil?: 'commit' | 'domcontentloaded' | 'load' | 'networkidle'
+  ): Promise<void> {
+    await this.page.goto(url, waitUntil ? { waitUntil } : undefined);
     await this.waitForLoaderToDisappear();
   }
 
@@ -78,6 +87,29 @@ export class WebUtil {
   async fill(selector: string | Locator, value: string): Promise<void> {
     console.log(`fill ${this.getCallingMethodName()} with value: "${value}"`);
     await this.resolve(selector).fill(value);
+    await this.waitForLoaderToDisappear();
+  }
+
+  /**
+   * Sets a value AND emits a real key event, for keyup-driven widgets (e.g.
+   * AJAX-powered search boxes) where a bare `fill()` bypasses the listeners
+   * that trigger the widget's behavior.
+   *
+   * All but the last character are set with fill() — only the final keystroke
+   * is sent as a real key press, which is what the keyup listener reacts to.
+   * Typing every character with a per-key delay cost ~1s on a 23-char Arabic
+   * project name for no added coverage (measured on WebKit).
+   */
+  async type(selector: string | Locator, value: string): Promise<void> {
+    console.log(`type ${this.getCallingMethodName()} with value: "${value}"`);
+    const locator = this.resolve(selector);
+    if (!value) {
+      await locator.fill('');
+      await this.waitForLoaderToDisappear();
+      return;
+    }
+    await locator.fill(value.slice(0, -1));
+    await locator.press(value.slice(-1));
     await this.waitForLoaderToDisappear();
   }
 
@@ -135,6 +167,14 @@ export class WebUtil {
 
   async waitForUri(uri: string, timeout = 60_000): Promise<void> {
     await this.page.waitForURL(new RegExp(uri), { timeout });
+  }
+
+  /**
+   * Fixed wait — use sparingly, only when the app gives no observable signal
+   * (e.g. a debounced AJAX check with no loader) to wait on instead.
+   */
+  async wait(milliseconds: number): Promise<void> {
+    await this.page.waitForTimeout(milliseconds);
   }
 
   async scrollToElement(selector: string | Locator): Promise<void> {
